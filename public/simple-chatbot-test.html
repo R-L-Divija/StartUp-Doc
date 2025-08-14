@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Chatbot Test</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: #f0f0f0;
+        min-height: 100vh;
+      }
+
+      .test-content {
+        max-width: 600px;
+        margin: 0 auto;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .status {
+        background: #e8f5e8;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 20px 0;
+        border-left: 4px solid #22c55e;
+      }
+
+      .status h3 {
+        margin-top: 0;
+        color: #22c55e;
+      }
+
+      .console-output {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        padding: 15px;
+        font-family: monospace;
+        font-size: 12px;
+        max-height: 200px;
+        overflow-y: auto;
+        margin: 20px 0;
+      }
+
+      .test-button {
+        background: #22c55e;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 10px 5px;
+      }
+
+      .test-button:hover {
+        background: #16a34a;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="test-content">
+      <h1>🤖 Simple Chatbot Test</h1>
+
+      <div class="status">
+        <h3>Test Status</h3>
+        <p>This page will test the chatbot functionality in isolation.</p>
+      </div>
+
+      <div class="console-output" id="consoleOutput">
+        <div>Console output will appear here...</div>
+      </div>
+
+      <div style="text-align: center">
+        <button class="test-button" onclick="testChatbot()">
+          Test Chatbot
+        </button>
+        <button class="test-button" onclick="clearConsole()">
+          Clear Console
+        </button>
+      </div>
+
+      <div class="status">
+        <h3>Expected Results</h3>
+        <ul>
+          <li>Green circular button should appear at bottom-right</li>
+          <li>Prominent "Need Help?" button should appear above it</li>
+          <li>Clicking either button should open the chatbot</li>
+          <li>Console should show initialization messages</li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      // Override console.log to show in our output
+      const originalLog = console.log;
+      const originalError = console.error;
+      const consoleOutput = document.getElementById('consoleOutput');
+
+      function addToConsole(message, isError = false) {
+        const div = document.createElement('div');
+        div.style.color = isError ? '#dc3545' : '#28a745';
+        div.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+        consoleOutput.appendChild(div);
+        consoleOutput.scrollTop = consoleOutput.scrollHeight;
+      }
+
+      console.log = function (...args) {
+        originalLog.apply(console, args);
+        addToConsole(args.join(' '));
+      };
+
+      console.error = function (...args) {
+        originalError.apply(console, args);
+        addToConsole(args.join(' '), true);
+      };
+
+      function clearConsole() {
+        consoleOutput.innerHTML = '<div>Console cleared...</div>';
+      }
+
+      function testChatbot() {
+        console.log('Testing chatbot functionality...');
+
+        // Check if chatbot elements exist
+        const minimized = document.getElementById('chatbotMinimized');
+        const container = document.getElementById('chatbotContainer');
+        const prominent = document.getElementById('prominentChatbotButton');
+
+        console.log('Minimized chatbot found:', !!minimized);
+        console.log('Chatbot container found:', !!container);
+        console.log('Prominent button found:', !!prominent);
+
+        if (minimized) {
+          console.log('Minimized chatbot display:', minimized.style.display);
+          console.log('Minimized chatbot position:', minimized.style.position);
+          console.log('Minimized chatbot z-index:', minimized.style.zIndex);
+        }
+
+        if (prominent) {
+          console.log('Prominent button display:', prominent.style.display);
+          console.log('Prominent button position:', prominent.style.position);
+          console.log('Prominent button z-index:', prominent.style.zIndex);
+        }
+      }
+
+      // Load the chatbot functionality
+      console.log('Loading chatbot test page...');
+
+      // Simulate the chatbot loading process
+      setTimeout(() => {
+        console.log('Simulating chatbot load...');
+
+        // Create chatbot HTML
+        const chatbotHTML = `
+                <!-- Minimized Chatbot -->
+                <div id="chatbotMinimized" class="chatbot-minimized" onclick="toggleChatbot()" style="display: flex !important;">
+                    <div class="chatbot-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+                        </svg>
+                    </div>
+                    <div class="chatbot-notification">2</div>
+                </div>
+                
+                <!-- Prominent Chatbot Button -->
+                <div id="prominentChatbotButton" class="prominent-chatbot-button" onclick="toggleChatbot()" style="display: block !important;">
+                    <div class="prominent-button-content">
+                        <div class="prominent-button-icon">🤖</div>
+                        <div class="prominent-button-text">
+                            <div class="prominent-button-title">Need Help?</div>
+                            <div class="prominent-button-subtitle">Ask our AI Assistant</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+        // Add chatbot styles
+        const chatbotStyles = `
+                <style>
+                    .chatbot-minimized {
+                        position: fixed !important;
+                        bottom: 20px !important;
+                        right: 20px !important;
+                        width: 60px !important;
+                        height: 60px !important;
+                        background: #22c55e !important;
+                        border-radius: 50% !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                        cursor: pointer !important;
+                        box-shadow: 0 8px 25px rgba(34, 197, 94, 0.3) !important;
+                        z-index: 9999 !important;
+                        border: 3px solid #ffffff !important;
+                        transition: all 0.3s ease !important;
+                    }
+                    
+                    .chatbot-icon {
+                        color: #ffffff !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                    }
+                    
+                    .chatbot-notification {
+                        position: absolute !important;
+                        top: -5px !important;
+                        right: -5px !important;
+                        background: #ef4444 !important;
+                        color: #ffffff !important;
+                        border-radius: 50% !important;
+                        width: 20px !important;
+                        height: 20px !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                        font-size: 12px !important;
+                        font-weight: bold !important;
+                        border: 2px solid #ffffff !important;
+                    }
+                    
+                    .prominent-chatbot-button {
+                        position: fixed !important;
+                        bottom: 100px !important;
+                        right: 20px !important;
+                        background: #22c55e !important;
+                        color: #ffffff !important;
+                        border-radius: 20px !important;
+                        padding: 15px 20px !important;
+                        cursor: pointer !important;
+                        box-shadow: 0 8px 25px rgba(0,0,0,0.3) !important;
+                        z-index: 9998 !important;
+                        transition: all 0.3s ease !important;
+                        border: 2px solid rgba(255,255,255,0.2) !important;
+                        min-width: 200px !important;
+                    }
+                    
+                    .prominent-button-content {
+                        display: flex !important;
+                        align-items: center !important;
+                        gap: 12px !important;
+                    }
+                    
+                    .prominent-button-icon {
+                        font-size: 24px !important;
+                    }
+                    
+                    .prominent-button-text {
+                        display: flex !important;
+                        flex-direction: column !important;
+                    }
+                    
+                    .prominent-button-title {
+                        font-weight: 700 !important;
+                        font-size: 16px !important;
+                        line-height: 1.2 !important;
+                    }
+                    
+                    .prominent-button-subtitle {
+                        font-size: 12px !important;
+                        opacity: 0.8 !important;
+                        line-height: 1.2 !important;
+                    }
+                </style>
+            `;
+
+        // Add to page
+        document.head.insertAdjacentHTML('beforeend', chatbotStyles);
+        document.body.insertAdjacentHTML('beforeend', chatbotHTML);
+
+        console.log('Chatbot HTML and CSS added to page');
+
+        // Test the elements
+        setTimeout(() => {
+          testChatbot();
+        }, 100);
+      }, 500);
+
+      // Simple toggle function for testing
+      function toggleChatbot() {
+        console.log('Chatbot toggle clicked!');
+        alert('Chatbot toggle clicked! This would open the chatbot interface.');
+      }
+    </script>
+    <script src="/chatbot.js"></script>
+  </body>
+</html>

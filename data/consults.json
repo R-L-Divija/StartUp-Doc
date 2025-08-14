@@ -1,0 +1,116 @@
+[
+  {
+    "id": "65998f03-9af5-449c-8843-adacdc48756c",
+    "name": "durga",
+    "email": "laura16@gmail.com",
+    "category": "company",
+    "message": "how to do that?",
+    "status": "accepted",
+    "acceptedBy": "lawyer",
+    "messages": [
+      {
+        "sender": "system",
+        "text": "Your consultation has been accepted by lawyer. Tap to chat: /user-chat.html?id=65998f03-9af5-449c-8843-adacdc48756c",
+        "timestamp": "2025-08-13T23:20:47.403Z"
+      },
+      {
+        "sender": "lawyer",
+        "from": "lawyer",
+        "text": "hello",
+        "timestamp": "2025-08-13T23:21:00.308Z"
+      }
+    ],
+    "createdAt": "2025-08-13T23:18:06.127Z",
+    "updatedAt": "2025-08-13T23:28:37.035Z"
+  },
+  {
+    "id": "cd58b4ba-032b-4466-b79d-8762c68fa9db",
+    "name": "durga",
+    "email": "laura16@gmail.com",
+    "category": "licenses",
+    "message": "how to do that?",
+    "status": "accepted",
+    "acceptedBy": "lawyer",
+    "messages": [
+      {
+        "sender": "system",
+        "text": "Your consultation has been accepted by lawyer. Tap to chat: /user-chat.html?id=cd58b4ba-032b-4466-b79d-8762c68fa9db",
+        "timestamp": "2025-08-13T23:25:41.708Z"
+      },
+      {
+        "sender": "lawyer",
+        "from": "lawyer",
+        "text": "hello",
+        "timestamp": "2025-08-13T23:25:52.467Z"
+      },
+      {
+        "sender": "lawyer",
+        "from": "nick",
+        "text": "what is affidavot",
+        "timestamp": "2025-08-14T02:53:26.759Z"
+      },
+      {
+        "sender": "lawyer",
+        "from": "lawyer",
+        "text": "It is legal law term",
+        "timestamp": "2025-08-14T04:54:32.862Z"
+      }
+    ],
+    "createdAt": "2025-08-13T23:25:07.113Z",
+    "updatedAt": "2025-08-14T04:54:32.862Z"
+  },
+  {
+    "id": "65c3c8a3-219c-40de-bbe6-9c4a37834322",
+    "name": "Laura",
+    "email": "durgab.24cse@kongu.edu",
+    "category": "company",
+    "message": "how to do that?",
+    "status": "accepted",
+    "acceptedBy": "lawyer",
+    "messages": [
+      {
+        "sender": "system",
+        "text": "Your consultation has been accepted by lawyer. Tap to chat: /user-chat.html?id=65c3c8a3-219c-40de-bbe6-9c4a37834322",
+        "timestamp": "2025-08-14T04:55:40.240Z"
+      },
+      {
+        "sender": "lawyer",
+        "from": "lawyer",
+        "text": "Hello laura!",
+        "timestamp": "2025-08-14T04:55:55.198Z"
+      },
+      {
+        "sender": "user",
+        "from": "durgab.24cse@kongu.edu",
+        "text": "hello sir",
+        "timestamp": "2025-08-14T05:32:27.687Z"
+      }
+    ],
+    "createdAt": "2025-08-14T04:55:28.318Z",
+    "updatedAt": "2025-08-14T05:32:27.690Z"
+  },
+  {
+    "id": "6b2ee58c-5987-42df-900d-d3610605fb4e",
+    "name": "Laura",
+    "email": "durgab.24cse@kongu.edu",
+    "category": "company",
+    "message": "how to do that?",
+    "status": "accepted",
+    "acceptedBy": "lawyer",
+    "messages": [
+      {
+        "sender": "system",
+        "text": "Your consultation has been accepted by lawyer. Tap to chat: /user-chat.html?id=6b2ee58c-5987-42df-900d-d3610605fb4e",
+        "timestamp": "2025-08-14T05:10:54.611Z"
+      },
+      {
+        "sender": "lawyer",
+        "from": "lawyer",
+        "text": "hello",
+        "timestamp": "2025-08-14T05:11:05.365Z"
+      }
+    ],
+    "createdAt": "2025-08-14T05:10:30.101Z",
+    "updatedAt": "2025-08-14T05:32:05.304Z"
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "username": "admin",
+    "email": "admin@docusuite.com",
+    "password": "admin123"
+  },
+  {
+    "username": "aby",
+    "email": "aby@gmail.com",
+    "password": "aby"
+  },
+  {
+    "username": "abx",
+    "email": "abx@gmail.com",
+    "password": "abx"
+  },
+  {
+    "username": "laura16",
+    "email": "laura16@gmail.com",
+    "password": "123"
+  },
+  {
+    "username": "durgab.24cse",
+    "email": "durgab.24cse@kongu.edu",
+    "password": "1234"
+  },
+  {
+    "username": "Durga",
+    "email": "kavidurgabaskaran@gmail.com",
+    "password": "1234"
+  }
+]

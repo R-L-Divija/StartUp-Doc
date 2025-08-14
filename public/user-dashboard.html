@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Dashboard • DocuSuite</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <style>
+      .user-dashboard {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        padding: 20px;
+      }
+
+      .dashboard-header {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .header-left h1 {
+        color: #f8fafc;
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      .header-left p {
+        color: #94a3b8;
+        font-size: 16px;
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .user-info {
+        text-align: right;
+      }
+
+      .user-info .email {
+        color: #f8fafc;
+        font-weight: 600;
+        font-size: 18px;
+      }
+
+      .user-info .role {
+        color: #94a3b8;
+        font-size: 14px;
+      }
+
+      .logout-btn {
+        background: linear-gradient(135deg, #ef4444, #dc2626);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .logout-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+      }
+
+      .documents-container {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 30px;
+      }
+
+      .documents-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+
+      .documents-header h2 {
+        color: #f8fafc;
+        font-size: 24px;
+        font-weight: 600;
+      }
+
+      .refresh-btn {
+        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .refresh-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+      }
+
+      .documents-list {
+        display: grid;
+        gap: 20px;
+      }
+
+      .document-item {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 25px;
+        transition: all 0.3s ease;
+      }
+
+      .document-item:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(59, 130, 246, 0.3);
+        transform: translateY(-2px);
+      }
+
+      .document-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 20px;
+      }
+
+      .document-info h3 {
+        color: #f8fafc;
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      .document-info .submission-id {
+        color: #3b82f6;
+        font-weight: 500;
+        font-size: 14px;
+      }
+
+      .document-status {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .status-pending {
+        background: rgba(245, 158, 11, 0.2);
+        color: #f59e0b;
+        border: 1px solid rgba(245, 158, 11, 0.3);
+      }
+
+      .status-verified {
+        background: rgba(34, 197, 94, 0.2);
+        color: #22c55e;
+        border: 1px solid rgba(34, 197, 94, 0.3);
+      }
+
+      .status-rejected {
+        background: rgba(239, 68, 68, 0.2);
+        color: #ef4444;
+        border: 1px solid rgba(239, 68, 68, 0.3);
+      }
+
+      .document-details {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .detail-item {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 12px;
+        border-radius: 8px;
+      }
+
+      .detail-item .label {
+        color: #94a3b8;
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+
+      .detail-item .value {
+        color: #f8fafc;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .document-actions {
+        display: flex;
+        gap: 15px;
+        justify-content: flex-end;
+      }
+
+      .download-btn {
+        background: linear-gradient(135deg, #22c55e, #16a34a);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .download-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+      }
+
+      .download-btn:disabled {
+        background: #64748b;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .no-documents {
+        text-align: center;
+        padding: 60px 20px;
+        color: #94a3b8;
+      }
+
+      .no-documents .icon {
+        font-size: 48px;
+        margin-bottom: 20px;
+        display: block;
+      }
+
+      .no-documents h3 {
+        color: #e2e8f0;
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+
+      .loading {
+        text-align: center;
+        padding: 40px;
+        color: #94a3b8;
+      }
+
+      .loading .spinner {
+        border: 3px solid rgba(255, 255, 255, 0.1);
+        border-top: 3px solid #3b82f6;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .rejection-reason {
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.2);
+        border-radius: 8px;
+        padding: 12px;
+        margin-top: 15px;
+      }
+
+      .rejection-reason .label {
+        color: #ef4444;
+        font-weight: 600;
+        font-size: 12px;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+
+      .rejection-reason .reason {
+        color: #fca5a5;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="user-dashboard">
+      <div class="dashboard-header">
+        <div class="header-left">
+          <h1>👤 User Dashboard</h1>
+          <p>Track your document submissions and downloads</p>
+        </div>
+        <div class="header-right">
+          <div class="user-info">
+            <div class="email" id="userEmail">User</div>
+            <div class="role">Document Submitter</div>
+          </div>
+          <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+      </div>
+
+      <div class="documents-container">
+        <div class="documents-header">
+          <h2>My Document Submissions</h2>
+          <button class="refresh-btn" onclick="loadUserDocuments()">
+            🔄 Refresh
+          </button>
+        </div>
+
+        <div id="userDocumentsList" class="documents-list">
+          <div class="loading">
+            <div class="spinner"></div>
+            <p>Loading your documents...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Check if user is logged in
+      function checkAuth() {
+        const userEmail = localStorage.getItem('userEmail');
+        if (!userEmail) {
+          // Redirect to home page if no email found
+          window.location.href = '/index.html';
+          return;
+        }
+
+        document.getElementById('userEmail').textContent = userEmail;
+      }
+
+      // Logout function
+      function logout() {
+        localStorage.removeItem('userEmail');
+        window.location.href = '/index.html';
+      }
+
+      // Load user documents from server
+      async function loadUserDocuments() {
+        const userEmail = localStorage.getItem('userEmail');
+        if (!userEmail) {
+          window.location.href = '/index.html';
+          return;
+        }
+
+        const documentsList = document.getElementById('userDocumentsList');
+
+        try {
+          documentsList.innerHTML = `
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>Loading your documents...</p>
+                    </div>
+                `;
+
+          const response = await fetch(
+            `/api/user/documents?email=${encodeURIComponent(userEmail)}`
+          );
+          const data = await response.json();
+
+          if (data.ok && data.documents.length > 0) {
+            displayUserDocuments(data.documents);
+          } else {
+            documentsList.innerHTML = `
+                        <div class="no-documents">
+                            <span class="icon">📄</span>
+                            <h3>No documents submitted yet</h3>
+                            <p>Submit your first document through the company registration form.</p>
+                        </div>
+                    `;
+          }
+        } catch (error) {
+          console.error('Error loading documents:', error);
+          documentsList.innerHTML = `
+                    <div class="no-documents">
+                        <span class="icon">❌</span>
+                        <h3>Error loading documents</h3>
+                        <p>Please try refreshing the page.</p>
+                    </div>
+                `;
+        }
+      }
+
+      // Display user documents in the list
+      function displayUserDocuments(documents) {
+        const documentsList = document.getElementById('userDocumentsList');
+
+        documentsList.innerHTML = documents
+          .map(
+            (doc) => `
+                <div class="document-item">
+                    <div class="document-header">
+                        <div class="document-info">
+                            <h3>${
+                              doc.companyName || 'Company Registration'
+                            }</h3>
+                            <div class="submission-id">ID: ${doc.id}</div>
+                        </div>
+                        <div class="document-status ${getStatusClass(
+                          doc.status
+                        )}">
+                            ${getStatusText(doc.status)}
+                        </div>
+                    </div>
+                    
+                    <div class="document-details">
+                        <div class="detail-item">
+                            <div class="label">Submission Date</div>
+                            <div class="value">${new Date(
+                              doc.submittedAt
+                            ).toLocaleDateString()}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="label">Document Type</div>
+                            <div class="value">${doc.documentType}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="label">Business Owner</div>
+                            <div class="value">${doc.businessOwnerName}</div>
+                        </div>
+                        ${
+                          doc.verifiedAt
+                            ? `
+                            <div class="detail-item">
+                                <div class="label">Verified Date</div>
+                                <div class="value">${new Date(
+                                  doc.verifiedAt
+                                ).toLocaleDateString()}</div>
+                            </div>
+                        `
+                            : ''
+                        }
+                    </div>
+                    
+                    ${
+                      doc.status === 'rejected' && doc.rejectionReason
+                        ? `
+                        <div class="rejection-reason">
+                            <div class="label">Rejection Reason</div>
+                            <div class="reason">${doc.rejectionReason}</div>
+                        </div>
+                    `
+                        : ''
+                    }
+                    
+                    <div class="document-actions">
+                        ${
+                          doc.status === 'verified'
+                            ? `
+                            <button class="download-btn" onclick="downloadVerifiedDocument('${doc.id}')">
+                                📥 Download Verified Document
+                            </button>
+                        `
+                            : doc.status === 'pending'
+                            ? `
+                            <button class="download-btn" disabled>
+                                ⏳ Pending Verification
+                            </button>
+                        `
+                            : `
+                            <button class="download-btn" disabled>
+                                ❌ Document Rejected
+                            </button>
+                        `
+                        }
+                    </div>
+                </div>
+            `
+          )
+          .join('');
+      }
+
+      // Get status class for styling
+      function getStatusClass(status) {
+        switch (status) {
+          case 'verified':
+            return 'status-verified';
+          case 'rejected':
+            return 'status-rejected';
+          default:
+            return 'status-pending';
+        }
+      }
+
+      // Get status text
+      function getStatusText(status) {
+        switch (status) {
+          case 'verified':
+            return 'Verified';
+          case 'rejected':
+            return 'Rejected';
+          default:
+            return 'Pending';
+        }
+      }
+
+      // Download verified document
+      async function downloadVerifiedDocument(documentId) {
+        try {
+          const response = await fetch(
+            `/api/user/documents/${documentId}/download`
+          );
+          if (response.ok) {
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `verified_document_${documentId}.pdf`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+          } else {
+            alert('Error downloading document');
+          }
+        } catch (error) {
+          console.error('Error downloading document:', error);
+          alert('Error downloading document');
+        }
+      }
+
+      // Initialize dashboard
+      document.addEventListener('DOMContentLoaded', () => {
+        checkAuth();
+        loadUserDocuments();
+      });
+    </script>
+  </body>
+  <script src="/chatbot.js"></script>
+</html>

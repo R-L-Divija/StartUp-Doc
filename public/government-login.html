@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Government Login • DocuSuite</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <style>
+      .government-login-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        padding: 20px;
+      }
+      .government-login-card {
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 16px;
+        padding: 32px;
+        width: 100%;
+        max-width: 420px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      }
+      .government-login-header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .government-login-header h1 {
+        color: #e2e8f0;
+        font-size: 26px;
+        margin: 0 0 6px;
+      }
+      .government-login-header p {
+        color: #94a3b8;
+        margin: 0;
+      }
+      .form-group {
+        margin-top: 14px;
+      }
+      .form-group label {
+        display: block;
+        color: #e2e8f0;
+        font-weight: 600;
+        margin-bottom: 6px;
+        font-size: 14px;
+      }
+      .form-group input {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.06);
+        color: #f8fafc;
+        font-size: 14px;
+        outline: none;
+        transition: all 0.25s;
+      }
+      .form-group input:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+      }
+      .login-btn {
+        width: 100%;
+        padding: 12px;
+        margin-top: 14px;
+        border-radius: 10px;
+        border: 0;
+        cursor: pointer;
+        font-weight: 700;
+        color: white;
+        background: linear-gradient(
+          135deg,
+          var(--accent, #6eb8e1),
+          var(--accent2, #c8abe6)
+        );
+      }
+      .hint {
+        color: #94a3b8;
+        font-size: 12px;
+        margin-top: 12px;
+        text-align: center;
+      }
+      .error-message {
+        color: #f44336;
+        margin-top: 10px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="government-login-container">
+      <div class="government-login-card">
+        <div class="government-login-header">
+          <h1>Government Login</h1>
+          <p>Officials only. Use your credentials to continue.</p>
+        </div>
+        <div class="form-group">
+          <label for="govUsername">Email</label>
+          <input
+            id="govUsername"
+            type="email"
+            placeholder="gov_official@docusuite.gov"
+          />
+        </div>
+        <div class="form-group">
+          <label for="govPassword">Password</label>
+          <input
+            id="govPassword"
+            type="password"
+            placeholder="Enter password"
+          />
+        </div>
+        <button class="login-btn" id="govLoginBtn">Login</button>
+        <div id="govError" class="error-message"></div>
+        <div class="hint">Default: gov_official@docusuite.gov / Gov@1234</div>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById('govLoginBtn')
+        .addEventListener('click', async () => {
+          const username = document.getElementById('govUsername').value.trim();
+          const password = document.getElementById('govPassword').value;
+          const out = document.getElementById('govError');
+          out.textContent = '';
+          try {
+            const res = await fetch('/api/government/login', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ username, password }),
+            });
+            const data = await res.json();
+            if (data && data.ok) {
+              localStorage.setItem('governmentLoggedIn', 'true');
+              localStorage.setItem('governmentUsername', username);
+              window.location.href = '/government-dashboard.html';
+            } else {
+              out.textContent = data.message || 'Invalid credentials';
+            }
+          } catch (e) {
+            out.textContent = 'Network error';
+          }
+        });
+    </script>
+  </body>
+</html>

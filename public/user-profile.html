@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile • DocuSuite</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'Poppins', sans-serif;
+        background: #e6f0ff;
+        min-height: 100vh;
+      }
+
+      .profile-container {
+        max-width: 800px;
+        margin: 120px auto 40px;
+        padding: 0 20px;
+      }
+
+      .profile-card {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .profile-header {
+        background: linear-gradient(135deg, #2979ff, #1c63d6);
+        color: white;
+        padding: 40px;
+        text-align: center;
+      }
+
+      .profile-avatar {
+        width: 100px;
+        height: 100px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 36px;
+        font-weight: 600;
+        border: 4px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .profile-name {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      .profile-email {
+        font-size: 16px;
+        opacity: 0.9;
+        font-weight: 400;
+      }
+
+      .profile-content {
+        padding: 40px;
+      }
+
+      .profile-section {
+        margin-bottom: 32px;
+      }
+
+      .profile-section h3 {
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #f0f0f0;
+      }
+
+      .profile-actions {
+        display: grid;
+        gap: 16px;
+        margin-top: 32px;
+      }
+
+      .profile-btn {
+        padding: 14px 24px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+      }
+
+      .btn-primary {
+        background: #2979ff;
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: #1c63d6;
+        transform: translateY(-2px);
+      }
+
+      .btn-secondary {
+        background: #f8f9fa;
+        color: #333;
+        border: 1px solid #dee2e6;
+      }
+
+      .btn-secondary:hover {
+        background: #e9ecef;
+        transform: translateY(-2px);
+      }
+
+      .btn-danger {
+        background: #dc3545;
+        color: white;
+      }
+
+      .btn-danger:hover {
+        background: #c82333;
+        transform: translateY(-2px);
+      }
+
+      .messages-preview {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 16px;
+      }
+
+      .message-item {
+        padding: 12px 0;
+        border-bottom: 1px solid #e9ecef;
+      }
+
+      .message-item:last-child {
+        border-bottom: none;
+      }
+
+      .message-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+
+      .message-type {
+        font-weight: 600;
+        color: #2979ff;
+      }
+
+      .message-date {
+        font-size: 12px;
+        color: #6c757d;
+      }
+
+      .message-content {
+        color: #495057;
+        font-size: 14px;
+      }
+
+      .message-preview {
+        margin-bottom: 8px;
+        line-height: 1.4;
+      }
+
+      .message-time {
+        font-size: 12px;
+        color: #6c757d;
+        font-weight: 500;
+      }
+
+      .message-status {
+        font-size: 12px;
+        color: #6c757d;
+        font-style: italic;
+      }
+
+      .no-messages {
+        text-align: center;
+        color: #6c757d;
+        padding: 40px 20px;
+        font-style: italic;
+      }
+
+      .message-actions {
+        margin-top: 10px;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .view-chat-btn {
+        padding: 8px 12px;
+        border: 1px solid #2979ff;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #2979ff;
+        background-color: #e6f0ff;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+      }
+
+      .view-chat-btn:hover {
+        background-color: #d0e0ff;
+      }
+
+      @media (max-width: 768px) {
+        .profile-container {
+          margin: 100px auto 20px;
+          padding: 0 16px;
+        }
+        
+        .profile-header {
+          padding: 30px 20px;
+        }
+        
+        .profile-content {
+          padding: 30px 20px;
+        }
+        
+        .profile-name {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar will be loaded here -->
+    <div id="navbar-placeholder"></div>
+
+    <div class="profile-container">
+      <div class="profile-card">
+        <div class="profile-header">
+          <div class="profile-avatar" id="profileAvatar">
+            U
+          </div>
+          <div class="profile-name" id="profileName">Loading...</div>
+          <div class="profile-email" id="profileEmail">loading@example.com</div>
+        </div>
+        
+        <div class="profile-content">
+          <div class="profile-section">
+            <h3>Account Information</h3>
+            <div class="profile-info">
+              <p><strong>Username:</strong> <span id="infoUsername">Loading...</span></p>
+              <p><strong>Email:</strong> <span id="infoEmail">Loading...</span></p>
+            </div>
+          </div>
+
+          <div class="profile-section">
+            <h3>Recent Messages</h3>
+            <div id="messagesPreview" class="messages-preview">
+              <div class="no-messages">Loading messages...</div>
+            </div>
+          </div>
+
+          <div class="profile-actions">
+            <a href="/index.html#legal" class="profile-btn btn-primary">Get Legal Advice</a>
+            <a href="/docgen.html" class="profile-btn btn-secondary">Document Generation</a>
+            <button id="logoutBtn" class="profile-btn btn-danger">Logout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Load navbar
+      async function loadNavbar() {
+        try {
+          const response = await fetch('/navbar.html');
+          const html = await response.text();
+          document.getElementById('navbar-placeholder').innerHTML = html;
+          
+          // Update navbar to show only username
+          updateProfileNavbar();
+        } catch (error) {
+          console.error('Error loading navbar:', error);
+        }
+      }
+
+      // Update navbar to show only username (no other buttons)
+      function updateProfileNavbar() {
+        const userBox = document.getElementById('userBox');
+        const usernameDisplay = document.getElementById('usernameDisplay');
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        
+        if (userBox && usernameDisplay) {
+          // Hide all buttons except username
+          const buttons = userBox.querySelectorAll('button');
+          buttons.forEach(btn => {
+            if (btn !== usernameDisplay) {
+              btn.style.display = 'none';
+            }
+          });
+          
+          // Hide login and register buttons
+          if (loginBtn) loginBtn.style.display = 'none';
+          if (registerBtn) registerBtn.style.display = 'none';
+          
+          // Username is now a styled button, just update the title
+          usernameDisplay.title = 'Click to refresh profile';
+        }
+      }
+
+      // Load user profile data
+      function loadUserProfile() {
+        const username = localStorage.getItem('currentUser');
+        const email = localStorage.getItem('userEmail');
+        
+        if (!username) {
+          window.location.href = '/login.html';
+          return;
+        }
+
+        // Update profile information
+        document.getElementById('profileName').textContent = username;
+        document.getElementById('profileEmail').textContent = email || username;
+        document.getElementById('infoUsername').textContent = username;
+        document.getElementById('infoEmail').textContent = email || username;
+        
+        // Update avatar with first letter of username
+        const firstLetter = username.charAt(0).toUpperCase();
+        document.getElementById('profileAvatar').textContent = firstLetter;
+
+        // Load recent messages
+        loadRecentMessages(email || username);
+      }
+
+      // Load recent messages
+      async function loadRecentMessages(email) {
+        const messagesContainer = document.getElementById('messagesPreview');
+        
+        // Show loading state
+        messagesContainer.innerHTML = '<div class="no-messages">Loading messages...</div>';
+        
+        try {
+          const response = await fetch(`/api/user/consultations?email=${encodeURIComponent(email)}`);
+          const data = await response.json();
+          
+          if (data.ok && Array.isArray(data.consultations) && data.consultations.length > 0) {
+            const recentConsultations = data.consultations.slice(0, 3); // Show only 3 recent
+            
+            // Fetch messages for each consultation
+            const consultationsWithMessages = await Promise.all(
+              recentConsultations.map(async (consult) => {
+                try {
+                  const messagesResponse = await fetch(`/api/user/chat/${consult.id}/messages`);
+                  const messagesData = await messagesResponse.json();
+                  return {
+                    ...consult,
+                    messages: messagesData.ok ? messagesData.messages : []
+                  };
+                } catch (error) {
+                  console.error(`Error fetching messages for consultation ${consult.id}:`, error);
+                  return { ...consult, messages: [] };
+                }
+              })
+            );
+            
+            const messagesHTML = consultationsWithMessages.map(consult => {
+              const lastMessage = consult.messages && consult.messages.length > 0 
+                ? consult.messages[consult.messages.length - 1] 
+                : null;
+              
+              return `
+                <div class="message-item">
+                  <div class="message-header">
+                    <span class="message-type">${consult.type || 'Legal Consultation'}</span>
+                    <span class="message-date">${new Date(consult.createdAt).toLocaleDateString()}</span>
+                  </div>
+                  <div class="message-content">
+                    ${lastMessage ? `
+                      <div class="message-preview">
+                        <strong>${lastMessage.sender === 'lawyer' ? 'Lawyer' : 'You'}:</strong> 
+                        ${lastMessage.text.length > 100 ? lastMessage.text.substring(0, 100) + '...' : lastMessage.text}
+                      </div>
+                      <div class="message-time">${new Date(lastMessage.timestamp).toLocaleTimeString()}</div>
+                    ` : `
+                      <div class="message-preview">No messages yet</div>
+                      <div class="message-status">Status: ${consult.status || 'Pending'}</div>
+                    `}
+                  </div>
+                  <div class="message-actions">
+                    <a href="/user-chat.html?id=${consult.id}" class="view-chat-btn">View Full Chat</a>
+                  </div>
+                </div>
+              `;
+            }).join('');
+            
+            messagesContainer.innerHTML = messagesHTML;
+          } else {
+            messagesContainer.innerHTML = '<div class="no-messages">No consultations yet. Get started with legal advice!</div>';
+          }
+        } catch (error) {
+          console.error('Error loading messages:', error);
+          messagesContainer.innerHTML = '<div class="no-messages">Unable to load messages. Please try again later.</div>';
+        }
+      }
+
+      // Handle logout
+      function handleLogout() {
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('userEmail');
+        window.location.href = '/';
+      }
+
+      // Initialize page
+      document.addEventListener('DOMContentLoaded', function() {
+        loadNavbar();
+        loadUserProfile();
+        
+        // Add logout event listener
+        document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+      });
+    </script>
+  </body>
+</html>

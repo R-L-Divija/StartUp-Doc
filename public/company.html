@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Company Registration • DocuSuite</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="light-page">
+    <div id="navbar"></div>
+    <main>
+      <section class="section">
+        <h2 class="reveal">Company Registration</h2>
+        <div class="card" id="companyFlow">
+          <div id="companyTimeline" class="process-timeline">
+            <button class="timeline-step" data-target="#nameRegForm">
+              Name Reg
+            </button>
+            <button class="timeline-step" data-target="#dscForm">DSC</button>
+            <button class="timeline-step" data-target="#dinForm">DIN</button>
+            <button class="timeline-step" data-target="#moaForm">MOA</button>
+            <button class="timeline-step" data-target="#aoaForm">AOA</button>
+            <button class="timeline-step" data-target="#certForm">
+              Certificate
+            </button>
+          </div>
+          <details open>
+            <summary>Name Registration and Approval</summary>
+            <form id="nameRegForm">
+              <label
+                >Company Type
+                <select name="companyType" required>
+                  <option value="Private Limited Company">
+                    Private Limited Company
+                  </option>
+                  <option value="Public Limited Company">
+                    Public Limited Company
+                  </option>
+                  <option value="OPC Private limited">
+                    OPC Private limited
+                  </option>
+                </select>
+              </label>
+              <label
+                >Name of Company
+                <input name="companyName" required />
+              </label>
+              <label
+                >Name of Business Owner
+                <input name="businessOwnerName" required />
+              </label>
+              <label
+                >Address Proof of Business Owner (PDF/Image)
+                <input
+                  type="file"
+                  name="ownerAddressProof"
+                  accept="application/pdf,image/*"
+                  required
+                />
+              </label>
+              <label
+                >Address Proof of Business Office (Land/Rental Doc)
+                <input
+                  type="file"
+                  name="officeAddressProof"
+                  accept="application/pdf,image/*"
+                  required
+                />
+              </label>
+              <button type="submit">Submit</button>
+              <div class="result" id="nameRegResult"></div>
+            </form>
+          </details>
+
+          <details>
+            <summary>Digital Signature Certificate</summary>
+            <form id="dscForm">
+              <label
+                >Business Owner Name
+                <input name="businessOwnerName" required />
+              </label>
+              <label
+                >Identity Proof (PDF/Image)
+                <input
+                  type="file"
+                  name="identityProof"
+                  accept="application/pdf,image/*"
+                  required
+                />
+              </label>
+              <label
+                >Address Proof (PDF/Image)
+                <input
+                  type="file"
+                  name="addressProof"
+                  accept="application/pdf,image/*"
+                  required
+                />
+              </label>
+              <label
+                >Passport Size Photo
+                <input
+                  type="file"
+                  name="passportPhoto"
+                  accept="image/*"
+                  required
+                />
+              </label>
+              <label
+                >Email
+                <input name="email" type="email" required />
+              </label>
+              <label
+                >Phone
+                <input name="phone" type="tel" required />
+              </label>
+              <button type="submit">Generate DSC</button>
+              <div class="result" id="dscResult"></div>
+            </form>
+          </details>
+
+          <details>
+            <summary>DIN</summary>
+            <form id="dinForm">
+              <label
+                >Business Owner Name
+                <input name="businessOwnerName" required />
+              </label>
+              <label
+                >Identity Proof (PDF/Image)
+                <input
+                  type="file"
+                  name="identityProof"
+                  accept="application/pdf,image/*"
+                  required
+                />
+              </label>
+              <label
+                >Address Proof (PDF/Image)
+                <input
+                  type="file"
+                  name="addressProof"
+                  accept="application/pdf,image/*"
+                  required
+                />
+              </label>
+              <label
+                >Passport Size Photo
+                <input
+                  type="file"
+                  name="passportPhoto"
+                  accept="image/*"
+                  required
+                />
+              </label>
+              <label
+                >DSC Certificate (PDF/Image)
+                <input
+                  type="file"
+                  name="dscCertificate"
+                  accept="application/pdf,image/*"
+                  required
+                />
+              </label>
+              <button type="submit">Generate DIN</button>
+              <div class="result" id="dinResult"></div>
+            </form>
+          </details>
+
+          <details>
+            <summary>MOA</summary>
+            <form id="moaForm">
+              <div class="grid">
+                <input name="class1" placeholder="Name Class" required />
+                <input
+                  name="class2"
+                  placeholder="RegistrationOffice Class"
+                  required
+                />
+                <input name="class3" placeholder="Objects Class" required />
+                <input name="class4" placeholder="Liability Class" required />
+                <input name="class5" placeholder="Capital Class" required />
+                <input
+                  name="class6"
+                  placeholder="Subscription Class"
+                  required
+                />
+              </div>
+              <button type="submit">Generate MOA</button>
+              <div class="result" id="moaResult"></div>
+            </form>
+          </details>
+
+          <details>
+            <summary>AOA</summary>
+            <form id="aoaForm">
+              <div class="grid">
+                <input name="class1" placeholder="Name Class" required />
+                <input
+                  name="class2"
+                  placeholder="RegistrationOffice Class"
+                  required
+                />
+                <input name="class3" placeholder="Objects Class" required />
+                <input name="class4" placeholder="Liability Class" required />
+                <input name="class5" placeholder="Capital Class" required />
+                <input
+                  name="class6"
+                  placeholder="Subscription Class"
+                  required
+                />
+              </div>
+              <button type="submit">Generate AOA</button>
+              <div class="result" id="aoaResult"></div>
+            </form>
+          </details>
+
+          <details>
+            <summary>Certificate of Incorporation</summary>
+            <form id="certForm">
+              <label
+                >Business Owner Name
+                <input name="businessOwnerName" required />
+              </label>
+              <label
+                >Company Name (defaults to sample)
+                <input name="companyName" />
+              </label>
+              <button type="submit">Generate Certificate</button>
+              <div class="result" id="certResult"></div>
+            </form>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <script src="/main.js"></script>
+    <script src="/chatbot.js"></script>
+    <script>
+      fetch('/navbar.html')
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById('navbar').innerHTML = data;
+        });
+    </script>
+  </body>
+</html>

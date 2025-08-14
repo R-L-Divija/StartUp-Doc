@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Other License • DocuSuite</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <style>
+      .process-timeline-ol {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        align-items: center;
+        position: relative;
+        margin-bottom: 24px;
+        margin-top: 32px;
+      }
+      .process-timeline-ol::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        height: 4px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        transform: translateY(-50%);
+        z-index: 0;
+      }
+      .timeline-step-ol {
+        position: relative;
+        z-index: 1;
+        background: #3a2621;
+        color: #fff7f2;
+        border: 1px solid rgba(255, 230, 215, 0.25);
+        border-radius: 999px;
+        padding: 16px 24px;
+        cursor: pointer;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+        text-transform: uppercase;
+        font-weight: 900;
+        letter-spacing: 0.6px;
+        font-size: 16px;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4),
+          0 0 10px rgba(239, 163, 160, 0.2);
+        transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+        outline: none;
+      }
+      .timeline-step-ol:hover,
+      .timeline-step-ol.active {
+        transform: translateY(-4px);
+        background: #2f211d;
+        box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35);
+        color: var(--accent2);
+      }
+      .ol-details {
+        display: none;
+        margin-bottom: 24px;
+      }
+      .ol-details.active {
+        display: block;
+        animation: fadeIn 0.4s;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="navbar"></div>
+    <!-- Navbar will be injected here by main.js -->
+    <main>
+      <section class="section">
+        <h2 class="reveal">Other License</h2>
+        <div class="card">
+          <div class="process-timeline-ol">
+            <button class="timeline-step-ol active" id="stepTax">
+              Tax Registration
+            </button>
+            <button class="timeline-step-ol" id="stepGov">
+              Government Licenses
+            </button>
+          </div>
+          <div class="ol-details active" id="taxDetails">
+            <details open>
+              <summary style="display: none">Tax Registration</summary>
+              <form id="taxForm">
+                <label>
+                  Type
+                  <select name="type" required>
+                    <option value="income-tax">Income Tax</option>
+                    <option value="gst">GST Registration</option>
+                  </select>
+                </label>
+                <label>
+                  Company Name
+                  <input name="companyName" required />
+                </label>
+                <button type="submit">Generate</button>
+                <div class="result" id="taxResult"></div>
+              </form>
+            </details>
+          </div>
+          <div class="ol-details" id="govDetails">
+            <details open>
+              <summary style="display: none">Government Licenses</summary>
+              <form id="govForm">
+                <label>
+                  Type
+                  <select name="type" required>
+                    <option value="import-export">Import Export License</option>
+                    <option value="fssai">FSSAI License</option>
+                    <option value="shop-establishment">
+                      Shop & Establishment License
+                    </option>
+                    <option value="drug">Drug License</option>
+                  </select>
+                </label>
+                <label>
+                  Business Name
+                  <input name="businessName" required />
+                </label>
+                <label>
+                  Owner Name
+                  <input name="ownerName" required />
+                </label>
+                <button type="submit">Apply</button>
+                <div class="result" id="govResult"></div>
+              </form>
+            </details>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script>
+      const stepTax = document.getElementById('stepTax');
+      const stepGov = document.getElementById('stepGov');
+      const taxDetails = document.getElementById('taxDetails');
+      const govDetails = document.getElementById('govDetails');
+      stepTax.addEventListener('click', () => {
+        stepTax.classList.add('active');
+        stepGov.classList.remove('active');
+        taxDetails.classList.add('active');
+        govDetails.classList.remove('active');
+      });
+      stepGov.addEventListener('click', () => {
+        stepGov.classList.add('active');
+        stepTax.classList.remove('active');
+        govDetails.classList.add('active');
+        taxDetails.classList.remove('active');
+      });
+    </script>
+
+    <script src="/main.js"></script>
+    <script src="/chatbot.js"></script>
+    <script>
+      fetch('/navbar.html')
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById('navbar').innerHTML = data;
+        });
+    </script>
+  </body>
+</html>

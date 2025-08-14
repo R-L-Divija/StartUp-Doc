@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lawyer Login - IDM Services</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .lawyer-login-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #0e1426 0%, #1e293b 100%);
+        padding: 20px;
+        padding-top: 100px; /* Account for fixed navbar */
+      }
+
+      .lawyer-login-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 40px;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      .lawyer-login-header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .lawyer-login-header h1 {
+        color: #22c55e;
+        margin-bottom: 10px;
+        font-size: 2rem;
+      }
+
+      .lawyer-login-header p {
+        color: #94a3b8;
+        font-size: 1rem;
+      }
+
+      .lawyer-login-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .lawyer-login-form input {
+        padding: 15px 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.3);
+        color: #e6ecff;
+        font-size: 1rem;
+        outline: none;
+        transition: all 0.3s ease;
+      }
+
+      .lawyer-login-form input:focus {
+        border-color: #22c55e;
+        box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+      }
+
+      .lawyer-login-form input::placeholder {
+        color: #64748b;
+      }
+
+      .lawyer-login-btn {
+        background: linear-gradient(135deg, #22c55e, #16a34a);
+        color: #0b1120;
+        border: none;
+        padding: 15px 20px;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .lawyer-login-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
+      }
+
+      .lawyer-login-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .lawyer-login-result {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        font-weight: 500;
+      }
+
+      .lawyer-login-result.success {
+        background: rgba(34, 197, 94, 0.1);
+        color: #22c55e;
+        border: 1px solid rgba(34, 197, 94, 0.3);
+      }
+
+      .lawyer-login-result.error {
+        background: rgba(239, 68, 68, 0.1);
+        color: #fca5a5;
+        border: 1px solid rgba(239, 68, 68, 0.3);
+      }
+
+      /* Lawyer Login Navbar Styles */
+      .lawyer-login-navbar {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 15px 30px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+      }
+
+      .lawyer-login-navbar-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .lawyer-login-navbar-logo {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+      }
+
+      .lawyer-login-navbar-title {
+        color: #22c55e;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin: 0;
+      }
+
+      @media (max-width: 768px) {
+        .lawyer-login-navbar {
+          padding: 10px 20px;
+        }
+        .lawyer-login-navbar-title {
+          font-size: 1.5rem;
+        }
+      }
+
+      .back-to-home {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .back-to-home a {
+        color: #22c55e;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .back-to-home a:hover {
+        color: #16a34a;
+      }
+
+      .lawyer-icon {
+        font-size: 3rem;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Lawyer Login Navbar -->
+    <nav class="lawyer-login-navbar">
+      <div class="lawyer-login-navbar-brand">
+        <img src="/images/logo.png" alt="Logo" class="lawyer-login-navbar-logo" />
+        <span class="lawyer-login-navbar-title">DocuSuite</span>
+      </div>
+    </nav>
+
+    <div class="lawyer-login-container">
+      <div class="lawyer-login-card">
+        <div class="lawyer-login-header">
+          <div class="lawyer-icon">⚖️</div>
+          <h1>Lawyer Login</h1>
+          <p>Access consultation requests and provide legal advice</p>
+        </div>
+
+        <form class="lawyer-login-form" id="lawyerLoginForm">
+          <input
+            type="text"
+            name="username"
+            placeholder="Lawyer Username"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+          />
+          <button type="submit" class="lawyer-login-btn" id="loginBtn">
+            Login to Dashboard
+          </button>
+        </form>
+
+        <div
+          class="lawyer-login-result"
+          id="loginResult"
+          style="display: none"
+        ></div>
+
+        <div class="back-to-home">
+          <a href="/index.html">← Back to Home</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const lawyerLoginForm = document.getElementById('lawyerLoginForm');
+      const loginBtn = document.getElementById('loginBtn');
+      const loginResult = document.getElementById('loginResult');
+
+      lawyerLoginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(lawyerLoginForm);
+        const username = formData.get('username');
+        const password = formData.get('password');
+
+        // Disable button and show loading
+        loginBtn.disabled = true;
+        loginBtn.textContent = 'Logging in...';
+        loginResult.style.display = 'none';
+
+        try {
+          const response = await fetch('/api/lawyer/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }),
+          });
+
+          const data = await response.json();
+
+          if (data.ok) {
+            // Store lawyer session
+            localStorage.setItem('lawyerUser', username);
+
+            // Show success message
+            loginResult.className = 'lawyer-login-result success';
+            loginResult.textContent =
+              'Login successful! Redirecting to dashboard...';
+            loginResult.style.display = 'block';
+
+            // Redirect to lawyer dashboard
+            setTimeout(() => {
+              window.location.href = '/lawyer-dashboard.html';
+            }, 1500);
+          } else {
+            throw new Error(data.error || 'Login failed');
+          }
+        } catch (error) {
+          loginResult.className = 'lawyer-login-result error';
+          loginResult.textContent =
+            error.message || 'Login failed. Please try again.';
+          loginResult.style.display = 'block';
+        } finally {
+          // Re-enable button
+          loginBtn.disabled = false;
+          loginBtn.textContent = 'Login to Dashboard';
+        }
+      });
+    </script>
+  </body>
+  <script src="/chatbot.js"></script>
+</html>

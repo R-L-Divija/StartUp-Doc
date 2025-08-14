@@ -1,0 +1,75 @@
+<header class="navbar">
+  <div class="brand" style="display: flex; align-items: center; gap: 10px">
+    <img
+      src="/images/logo.png"
+      alt="Logo"
+      style="height: 32px; width: 32px; object-fit: contain"
+    />
+    <span>DocuSuite</span>
+  </div>
+  <nav class="nav-links">
+    <a href="/index.html#hero">Home</a>
+    <a href="/index.html#summarizeSection">Summarization</a>
+    <a href="/docgen.html">Document Generation</a>
+    <a href="/index.html#legal">Legal Advise</a>
+    <a href="/lawyer-login.html">Lawyer Login</a>
+    <a href="/government-login.html">Government Login</a>
+  </nav>
+  <div class="auth">
+    <button
+      id="loginBtn"
+      class="link"
+      onclick="window.location.href='/login.html?mode=login'"
+    >
+      Login
+    </button>
+    <span class="sep"></span>
+    <button
+      id="registerBtn"
+      class="link"
+      onclick="window.location.href='/login.html?mode=register'"
+    >
+      Register
+    </button>
+    <div id="userBox" class="user-box hidden">
+      <button id="usernameDisplay" class="username-btn" onclick="window.location.href='/user-profile.html'"></button>
+    </div>
+  </div>
+</header>
+<style>
+  .username-btn {
+    background: #2979ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    display: inline-block;
+    min-width: 80px;
+  }
+  
+  .username-btn:hover {
+    background: #1c63d6;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(41, 121, 255, 0.3);
+  }
+  
+  .username-btn:active {
+    transform: translateY(0);
+  }
+</style>
+<script>
+  // Read query parameter to decide which tab to show
+  const params = new URLSearchParams(window.location.search);
+  const mode = params.get('mode');
+  if (mode === 'register') {
+    showTab('register');
+  } else {
+    showTab('login');
+  }
+</script>

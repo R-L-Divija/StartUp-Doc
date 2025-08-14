@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document Generation • DocuSuite</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <style>
+      html {
+        scroll-behavior: smooth; /* Smooth scrolling effect */
+      }
+    </style>
+  </head>
+  <body>
+    <div id="navbar"></div>
+
+    <!-- Navbar will be injected here by main.js -->
+
+    <main>
+      <section
+        style="
+          padding: 10px 20px;
+          background: linear-gradient(90deg, #ffe6d7, #fff7f2);
+        "
+      >
+        <div
+          style="
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: auto;
+          "
+        >
+          <div style="flex: 1 1 500px; padding: 20px">
+            <h4
+              style="
+                color: #3a2621;
+                font-size: 14px;
+                letter-spacing: 2px;
+                margin: 0;
+              "
+            >
+              COMPANY & DOCUMENT REGISTRATION
+            </h4>
+            <h2 style="font-size: 2rem; margin: 10px 0; color: #8b597b">
+              End-to-End Registration for Businesses and Individuals
+            </h2>
+            <p style="color: #3a2621; line-height: 1.6; margin: 0">
+              We handle the complete process of
+              <strong>company registration</strong>
+              and other essential document registrations — from name approval,
+              digital signatures, and identification numbers to drafting
+              MOA/AOA, government filings, and compliance documents. Our team
+              ensures accuracy, legal compliance, and timely delivery so you can
+              focus on growing your business.
+            </p>
+            <div style="display: flex; gap: 40px; margin: 20px 0">
+              <div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 5px">98%</h3>
+                <p style="margin: 0">Approval Success Rate</p>
+              </div>
+              <div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 5px">70%</h3>
+                <p style="margin: 0">Faster Processing</p>
+              </div>
+            </div>
+            <button
+              id="startRegistrationBtn"
+              style="
+                background: #493129;
+                color: #fff7f2;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+              "
+            >
+              Start Registration
+            </button>
+          </div>
+
+          <div style="flex: 1 1 400px; text-align: center">
+            <img
+              src="/images/n1.png"
+              alt="Registration Process"
+              style="max-width: 100%; border-radius: 10px"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section id="docgenSection" class="section docgen">
+        <h2 class="reveal" style="color: #493129">Document Generation</h2>
+        <div class="grid docgen-cards">
+          <a
+            href="/company.html"
+            class="card"
+            style="text-decoration: none; color: inherit"
+          >
+            <div class="cover" style="--img: url('/images/p1.png')"></div>
+            <div class="body">
+              <h3 style="margin-top: 45px">Company Registration</h3>
+              <p class="muted">
+                Incorporation, DSC, DIN, MOA, AOA, Certificate of Incorporation.
+              </p>
+              <ul class="desc">
+                <li>Choose structure and reserve name</li>
+                <li>Upload KYC and office proofs</li>
+                <li>Auto-generate compliant PDFs</li>
+              </ul>
+              <button type="button">Open</button>
+            </div>
+          </a>
+          <a
+            href="/otherlicense.html"
+            class="card"
+            style="text-decoration: none; color: inherit"
+          >
+            <div class="cover" style="--img: url('/images/p2.png')"></div>
+            <div class="body">
+              <h3 style="margin-top: 45px">Other License</h3>
+              <p class="muted">
+                Tax Registration, Import-Export, FSSAI, Shop & Establishment,
+                Drug License.
+              </p>
+              <ul class="desc">
+                <li>Tax Registration (Income Tax, GST)</li>
+                <li>
+                  Government Licenses (Import-Export, FSSAI, Shop &
+                  Establishment, Drug License)
+                </li>
+                <li>All-in-one application and tracking</li>
+              </ul>
+              <button type="button">Open</button>
+            </div>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <script src="/main.js"></script>
+    <script src="/chatbot.js"></script>
+    <script>
+      // Scroll to Document Generation section on button click
+      document
+        .getElementById('startRegistrationBtn')
+        .addEventListener('click', function () {
+          document
+            .getElementById('docgenSection')
+            .scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+
+    <script>
+      fetch('/navbar.html')
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById('navbar').innerHTML = data;
+        });
+    </script>
+    <footer>
+      <small>Prototype app - for demonstration only</small>
+    </footer>
+  </body>
+</html>

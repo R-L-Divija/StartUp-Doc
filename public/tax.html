@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tax Registration • DocuSuite</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div id="navbar"></div>
+
+    <main>
+      <section class="section">
+        <h2 class="reveal">Tax Registration</h2>
+        <div class="card">
+          <details open>
+            <summary>Tax Registration</summary>
+            <form id="taxForm">
+              <label
+                >Type
+                <select name="type" required>
+                  <option value="income-tax">Income Tax</option>
+                  <option value="gst">GST Registration</option>
+                </select>
+              </label>
+              <label
+                >Applicant Name
+                <input name="applicantName" required />
+              </label>
+              <button type="submit">Generate</button>
+              <div class="result" id="taxResult"></div>
+            </form>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <script src="/main.js"></script>
+    <script src="/chatbot.js"></script>
+    <script>
+      fetch('/navbar.html')
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById('navbar').innerHTML = data;
+        });
+    </script>
+  </body>
+</html>

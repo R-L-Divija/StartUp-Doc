@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lawyer Dashboard - IDM Services</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .lawyer-dashboard {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #0e1426 0%, #1e293b 100%);
+        padding: 20px;
+        padding-top: 100px; /* Account for fixed navbar */
+      }
+
+      .lawyer-header {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .lawyer-header h1 {
+        color: #22c55e;
+        margin: 0;
+        font-size: 2rem;
+      }
+
+      .lawyer-info {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .lawyer-name {
+        color: #e6ecff;
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+
+      .logout-btn {
+        background: linear-gradient(135deg, #ef4444, #dc2626);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .logout-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3);
+      }
+
+      .dashboard-content {
+        display: grid;
+        gap: 30px;
+      }
+
+      .stats-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .stat-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 25px;
+        text-align: center;
+      }
+
+      .stat-number {
+        color: #22c55e;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      .stat-label {
+        color: #94a3b8;
+        font-size: 1rem;
+      }
+
+      .consultations-section {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 30px;
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+      }
+
+      .section-title {
+        color: #e6ecff;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .refresh-btn {
+        background: linear-gradient(135deg, #22c55e, #16a34a);
+        color: #0b1120;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .refresh-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
+      }
+
+      .consultations-list {
+        display: grid;
+        gap: 20px;
+      }
+
+      .consultation-card {
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 25px;
+        transition: all 0.3s ease;
+      }
+
+      .consultation-card:hover {
+        border-color: #22c55e;
+        transform: translateY(-2px);
+      }
+
+      .consultation-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 15px;
+      }
+
+      .consultation-id {
+        color: #22c55e;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      .consultation-date {
+        color: #64748b;
+        font-size: 0.9rem;
+      }
+
+      .consultation-category {
+        background: rgba(34, 197, 94, 0.2);
+        color: #22c55e;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+        display: inline-block;
+      }
+
+      .consultation-details {
+        display: grid;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .detail-row {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 15px;
+        align-items: center;
+      }
+
+      .detail-label {
+        color: #94a3b8;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      .detail-value {
+        color: #e6ecff;
+        font-size: 0.95rem;
+      }
+
+      .consultation-message {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 15px;
+        color: #e6ecff;
+        line-height: 1.6;
+      }
+
+      .consultation-actions {
+        margin-top: 20px;
+        display: flex;
+        gap: 15px;
+      }
+
+      .accept-btn {
+        background: linear-gradient(135deg, #22c55e, #16a34a);
+        color: #0b1120;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        flex: 1;
+      }
+
+      .accept-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
+      }
+
+      .accept-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .chat-btn {
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        flex: 1;
+      }
+
+      .chat-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+      }
+
+      /* Chat Modal Styles */
+      .chat-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+      }
+
+      .chat-container {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        width: 90%;
+        max-width: 600px;
+        height: 80%;
+        max-height: 600px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .chat-header {
+        background: rgba(34, 197, 94, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 20px 20px 0 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .chat-header h3 {
+        color: #22c55e;
+        margin: 0;
+        font-size: 1.3rem;
+      }
+
+      .close-chat {
+        background: none;
+        border: none;
+        color: #94a3b8;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 5px;
+        border-radius: 5px;
+        transition: color 0.3s ease;
+      }
+
+      .close-chat:hover {
+        color: #ef4444;
+      }
+
+      .chat-messages {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .message {
+        max-width: 80%;
+        padding: 12px 16px;
+        border-radius: 15px;
+        word-wrap: break-word;
+      }
+
+      .message.user {
+        background: rgba(59, 130, 246, 0.2);
+        color: #e6ecff;
+        align-self: flex-end;
+        border-bottom-right-radius: 5px;
+      }
+
+      .message.lawyer {
+        background: rgba(34, 197, 94, 0.2);
+        color: #e6ecff;
+        align-self: flex-start;
+        border-bottom-left-radius: 5px;
+      }
+
+      .message-time {
+        font-size: 0.8rem;
+        color: #64748b;
+        margin-top: 5px;
+      }
+
+      .chat-input-container {
+        padding: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        gap: 10px;
+      }
+
+      .chat-input {
+        flex: 1;
+        padding: 12px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.3);
+        color: #e6ecff;
+        outline: none;
+        transition: border-color 0.3s ease;
+      }
+
+      .chat-input:focus {
+        border-color: #22c55e;
+      }
+
+      .send-btn {
+        background: linear-gradient(135deg, #22c55e, #16a34a);
+        color: #0b1120;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .send-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
+      }
+
+      .send-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .accepted-status {
+        background: rgba(34, 197, 94, 0.2);
+        color: #22c55e;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-top: 15px;
+        display: inline-block;
+      }
+
+      .no-consultations {
+        text-align: center;
+        color: #94a3b8;
+        padding: 50px 20px;
+        font-size: 1.1rem;
+      }
+
+      .loading {
+        text-align: center;
+        color: #22c55e;
+        padding: 50px 20px;
+        font-size: 1.1rem;
+      }
+
+      .error-message {
+        background: rgba(239, 68, 68, 0.1);
+        color: #ef4444;
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      /* Lawyer Dashboard Navbar Styles */
+      .lawyer-navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+      }
+
+      .lawyer-navbar-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .lawyer-navbar-logo {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+      }
+
+      .lawyer-navbar-title {
+        color: #22c55e;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin: 0;
+      }
+
+      .lawyer-navbar-actions {
+        display: flex;
+        gap: 15px;
+      }
+
+      .lawyer-navbar-logout {
+        background: linear-gradient(135deg, #ef4444, #dc2626);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .lawyer-navbar-logout:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3);
+      }
+
+      @media (max-width: 768px) {
+        .lawyer-header {
+          flex-direction: column;
+          gap: 20px;
+          text-align: center;
+        }
+
+        .stats-cards {
+          grid-template-columns: 1fr;
+        }
+
+        .detail-row {
+          grid-template-columns: 1fr;
+          gap: 5px;
+        }
+
+        .chat-container {
+          width: 95%;
+          height: 90%;
+        }
+
+        .consultation-actions {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+
+    <div class="lawyer-dashboard">
+      <div class="lawyer-header">
+        <div>
+          <h1>⚖️ Lawyer Dashboard</h1>
+          <p style="color: #94a3b8; margin: 5px 0 0 0">
+            Manage consultation requests and provide legal advice
+          </p>
+        </div>
+        <div class="lawyer-info">
+          <span class="lawyer-name" id="lawyerName">Loading...</span>
+          <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+      </div>
+
+      <div class="dashboard-content">
+        <div class="stats-cards">
+          <div class="stat-card">
+            <div class="stat-number" id="totalRequests">0</div>
+            <div class="stat-label">Total Requests</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="pendingRequests">0</div>
+            <div class="stat-label">Pending Requests</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="todayRequests">0</div>
+            <div class="stat-label">Today's Requests</div>
+          </div>
+        </div>
+
+        <div class="consultations-section">
+          <div class="section-header">
+            <h2 class="section-title">Consultation Requests</h2>
+            <button class="refresh-btn" onclick="loadConsultations()">
+              🔄 Refresh
+            </button>
+          </div>
+
+          <div id="consultationsContainer">
+            <div class="loading">Loading consultation requests...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat Modal -->
+    <div class="chat-modal" id="chatModal">
+      <div class="chat-container" id="chatContainer">
+        <div class="chat-header">
+          <h3 id="chatHeader">Chat with Client</h3>
+          <button class="close-chat" id="closeChatBtn">&times;</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+          <!-- Messages will be added here dynamically -->
+        </div>
+        <div class="chat-input-container">
+          <input
+            type="text"
+            class="chat-input"
+            id="chatInput"
+            placeholder="Type your message..."
+            maxlength="500"
+          />
+          <button class="send-btn" id="sendBtn">Send</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hidden input to store current consultation ID -->
+    <input type="hidden" id="consultationId" value="" />
+
+    <script>
+      // Check if lawyer is logged in
+      function checkAuth() {
+        const lawyerUser = localStorage.getItem('lawyerUser');
+        if (!lawyerUser) {
+          window.location.href = '/lawyer-login.html';
+          return;
+        }
+        document.getElementById('lawyerName').textContent = lawyerUser;
+      }
+
+      // Logout function
+      function logout() {
+        localStorage.removeItem('lawyerUser');
+        window.location.href = '/lawyer-login.html';
+      }
+
+      // Load consultation requests
+      async function loadConsultations() {
+        const container = document.getElementById('consultationsContainer');
+        container.innerHTML =
+          '<div class="loading">Loading consultation requests...</div>';
+
+        try {
+          const response = await fetch('/api/lawyer/consultations');
+          const data = await response.json();
+
+          if (data.ok) {
+            displayConsultations(data.consultations);
+            updateStats(data.consultations);
+          } else {
+            throw new Error(data.error || 'Failed to load consultations');
+          }
+        } catch (error) {
+          container.innerHTML = `
+                    <div class="error-message">
+                        Error: ${error.message}
+                    </div>
+                `;
+        }
+      }
+
+      // Display consultations
+      function displayConsultations(consultations) {
+        const container = document.getElementById('consultationsContainer');
+
+        if (consultations.length === 0) {
+          container.innerHTML = `
+                    <div class="no-consultations">
+                        <div style="font-size: 3rem; margin-bottom: 20px;">📭</div>
+                        No consultation requests found
+                    </div>
+                `;
+          return;
+        }
+
+        const consultationsHTML = consultations
+          .map((consultation) => {
+            const date = new Date(consultation.createdAt).toLocaleDateString(
+              'en-IN',
+              {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+              }
+            );
+
+            const isAccepted = consultation.status === 'accepted';
+            const acceptedBy = consultation.acceptedBy || '';
+
+            return `
+                    <div class="consultation-card">
+                        <div class="consultation-header">
+                            <div class="consultation-id">Request ID: ${
+                              consultation.id
+                            }</div>
+                            <div class="consultation-date">${date}</div>
+                        </div>
+                        
+                        <div class="consultation-category">${consultation.category.toUpperCase()}</div>
+                        
+                        <div class="consultation-details">
+                            <div class="detail-row">
+                                <div class="detail-label">Name:</div>
+                                <div class="detail-value">${
+                                  consultation.name
+                                }</div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Email:</div>
+                                <div class="detail-value">${
+                                  consultation.email
+                                }</div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Phone:</div>
+                                <div class="detail-value">${
+                                  consultation.phone || 'Not provided'
+                                }</div>
+                            </div>
+                        </div>
+                        
+                        <div class="consultation-message">
+                            <strong>Message:</strong><br>
+                            ${consultation.message}
+                        </div>
+
+                        ${
+                          isAccepted
+                            ? `
+                            <div class="accepted-status">
+                                ✅ Accepted by ${acceptedBy}
+                            </div>
+                            <div class="consultation-actions">
+                                <button class="chat-btn" onclick="openChatModal('${consultation.id}', '${consultation.name}')">
+                                    💬 Chat with ${consultation.name}
+                                </button>
+                            </div>
+                        `
+                            : `
+                            <div class="consultation-actions">
+                                <button class="accept-btn" onclick="acceptConsultation('${consultation.id}')">
+                                    ✅ Accept Consultation
+                                </button>
+                                <button class="chat-btn" onclick="openChatModal('${consultation.id}', '${consultation.name}')" disabled>
+                                    💬 Chat (Accept First)
+                                </button>
+                            </div>
+                        `
+                        }
+                    </div>
+                `;
+          })
+          .join('');
+
+        container.innerHTML = consultationsHTML;
+      }
+
+      // Update statistics
+      function updateStats(consultations) {
+        const total = consultations.length;
+        const today = new Date().toDateString();
+        const todayCount = consultations.filter(
+          (c) => new Date(c.createdAt).toDateString() === today
+        ).length;
+
+        document.getElementById('totalRequests').textContent = total;
+        document.getElementById('pendingRequests').textContent = total; // All are pending for now
+        document.getElementById('todayRequests').textContent = todayCount;
+      }
+
+      // Accept consultation
+      async function acceptConsultation(consultationId) {
+        try {
+          const lawyerUser = localStorage.getItem('lawyerUser');
+          const response = await fetch(
+            `/api/lawyer/consultations/${consultationId}/accept`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ lawyerUsername: lawyerUser }),
+            }
+          );
+
+          const data = await response.json();
+
+          if (data.ok) {
+            alert(
+              'Consultation accepted successfully! You can now chat with the client.'
+            );
+            loadConsultations(); // Refresh the list to show accepted status
+          } else {
+            alert(
+              'Failed to accept consultation: ' +
+                (data.error || 'Unknown error')
+            );
+          }
+        } catch (error) {
+          alert('Error accepting consultation: ' + error.message);
+        }
+      }
+
+      // Chat Modal Functions
+      let currentConsultationId = null;
+      let currentClientName = null;
+
+      function openChatModal(id, name) {
+        currentConsultationId = id;
+        currentClientName = name;
+
+        // Update chat header
+        document.getElementById('chatHeader').textContent = `Chat with ${name}`;
+
+        // Show modal
+        document.getElementById('chatModal').style.display = 'flex';
+
+        // Clear previous messages
+        document.getElementById('chatMessages').innerHTML = '';
+
+        // Load chat history
+        loadChatHistory(id);
+
+        // Focus on input
+        document.getElementById('chatInput').focus();
+      }
+
+      function closeChatModal() {
+        document.getElementById('chatModal').style.display = 'none';
+        currentConsultationId = null;
+        currentClientName = null;
+        document.getElementById('chatInput').value = '';
+      }
+
+      async function loadChatHistory(consultationId) {
+        try {
+          const response = await fetch(
+            `/api/lawyer/chat/${consultationId}/messages`
+          );
+          const data = await response.json();
+
+          if (data.ok && data.messages) {
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.innerHTML = '';
+
+            data.messages.forEach((message) => {
+              const messageElement = document.createElement('div');
+              messageElement.classList.add(
+                'message',
+                message.sender === 'lawyer' ? 'lawyer' : 'user'
+              );
+              messageElement.innerHTML = `
+                            <div>${message.text}</div>
+                            <div class="message-time">${new Date(
+                              message.timestamp
+                            ).toLocaleTimeString('en-IN', {
+                              hour: '2-digit',
+                              minute: '2-digit',
+                            })}</div>
+                        `;
+              chatMessages.appendChild(messageElement);
+            });
+
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+          }
+        } catch (error) {
+          console.error('Error loading chat history:', error);
+        }
+      }
+
+      async function sendMessage() {
+        const messageInput = document.getElementById('chatInput');
+        const message = messageInput.value.trim();
+
+        if (!message || !currentConsultationId) return;
+
+        try {
+          const lawyerUser = localStorage.getItem('lawyerUser');
+          const response = await fetch(
+            `/api/lawyer/chat/${currentConsultationId}/send`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                message: message,
+                lawyerUsername: lawyerUser,
+              }),
+            }
+          );
+
+          const data = await response.json();
+
+          if (data.ok) {
+            // Add message to chat
+            const chatMessages = document.getElementById('chatMessages');
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', 'lawyer');
+            messageElement.innerHTML = `
+                        <div>${message}</div>
+                        <div class="message-time">${new Date().toLocaleTimeString(
+                          'en-IN',
+                          { hour: '2-digit', minute: '2-digit' }
+                        )}</div>
+                    `;
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Clear input
+            messageInput.value = '';
+          } else {
+            alert('Failed to send message: ' + (data.error || 'Unknown error'));
+          }
+        } catch (error) {
+          alert('Error sending message: ' + error.message);
+        }
+      }
+
+      // Initialize dashboard
+      document.addEventListener('DOMContentLoaded', () => {
+        checkAuth();
+        loadConsultations();
+
+        // Chat Modal Event Listeners
+        document
+          .getElementById('closeChatBtn')
+          .addEventListener('click', closeChatModal);
+        document
+          .getElementById('chatInput')
+          .addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+              sendMessage();
+            }
+          });
+        document
+          .getElementById('sendBtn')
+          .addEventListener('click', sendMessage);
+
+        // Close modal when clicking outside
+        document.getElementById('chatModal').addEventListener('click', (e) => {
+          if (e.target.id === 'chatModal') {
+            closeChatModal();
+          }
+        });
+      });
+
+      // Lawyer logout function
+      function handleLawyerLogout() {
+        localStorage.removeItem('lawyerUser');
+        localStorage.removeItem('lawyerEmail');
+        window.location.href = '/lawyer-login.html';
+      }
+    </script>
+  </body>
+  <script src="/chatbot.js"></script>
+</html>

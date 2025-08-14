@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Company & License Registration</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div id="navbar"></div>
+
+    <main>
+      <!-- Section 1: Hero Banner (replaces carousel) -->
+      <section id="hero" class="hero section hero-banner">
+        <div class="hero-inner">
+          <div class="hero-copy reveal">
+            <div class="eyebrow">Your AI-Powered Legal Partner</div>
+            <h1>Smart Legal Solutions in Minutes</h1>
+            <p>
+              Simplify your legal work with AI-driven document summarization,
+              automatic drafting, and instant legal guidance from experts — all
+              in one secure platform.
+            </p>
+            <div class="cta-row">
+              <a href="/docgen.html" class="btn-primary">Generate Documents</a>
+              <a href="#summarizeSection" class="btn-secondary"
+                >Try Summarizer</a
+              >
+            </div>
+          </div>
+          <div class="hero-visual reveal">
+            <img src="./images/head1.png" alt="AI Legal Assistant" />
+          </div>
+        </div>
+
+        <div class="features-row">
+          <div class="feature-card card reveal">
+            <div class="icon">📄</div>
+            <div class="label">AI Document Summarization</div>
+          </div>
+          <div class="feature-card card reveal">
+            <div class="icon">🖋️</div>
+            <div class="label">Automated Legal Drafting</div>
+          </div>
+          <div class="feature-card card reveal">
+            <div class="icon">🤖</div>
+            <div class="label">24/7 AI Legal Advice</div>
+          </div>
+          <div class="feature-card card reveal">
+            <div class="icon">🔒</div>
+            <div class="label">Secure & Compliant Platform</div>
+          </div>
+          <div class="feature-card card reveal">
+            <div class="icon">⚡</div>
+            <div class="label">Fast & Reliable Results</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Us Section -->
+      <section
+        id="about"
+        style="
+          padding: 60px 20px;
+          background-color: #ffffff;
+          font-family: 'Poppins', Arial, sans-serif;
+          font-weight: 500;
+          color: #121323;
+        "
+      >
+        <div
+          style="
+            display: flex;
+            gap: 40px;
+            max-width: 1200px;
+            margin: auto;
+            flex-wrap: wrap;
+            align-items: center;
+          "
+        >
+          <!-- Left: Text Content -->
+          <div style="flex: 1; min-width: 300px" class="scroll-animate">
+            <h2
+              style="
+                color: var(--accent);
+                font-size: 32px;
+                margin-bottom: 10px;
+                font-weight: 700;
+              "
+              class="scroll-animate-item"
+            >
+              About Us
+            </h2>
+            <p
+              style="
+                color: var(--muted);
+                line-height: 1.6;
+                margin-bottom: 30px;
+                font-weight: 500;
+              "
+              class="scroll-animate-item"
+            >
+              At <strong>DocuSuite</strong>, we're redefining how legal
+              documentation is created, summarized, and understood — making it
+              faster, easier, and more accessible for everyone.
+            </p>
+
+            <div
+              style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px"
+              class="scroll-animate-item"
+            >
+              <div
+                style="display: flex; align-items: flex-start; gap: 12px"
+                class="scroll-animate-item"
+              >
+                <div
+                  style="
+                    background-color: var(--accent);
+                    color: #fff;
+                    border-radius: 70%;
+                    width: 32px;
+                    height: 32px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: bold;
+                  "
+                >
+                  1
+                </div>
+                <div>
+                  <h4
+                    style="
+                      margin: 0;
+                      font-size: 16px;
+                      color: rgb(24, 10, 37);
+                      font-weight: 600;
+                    "
+                  >
+                    Who We Are
+                  </h4>
+                  <p
+                    style="margin: 5px 0; color: var(--muted); font-weight: 500"
+                  >
+                    We are an AI-powered legal tech platform helping individuals
+                    and businesses handle documentation with confidence.
+                  </p>
+                </div>
+              </div>
+
+              <div
+                style="display: flex; align-items: flex-start; gap: 12px"
+                class="scroll-animate-item"
+              >
+                <div
+                  style="
+                    background-color: var(--accent);
+                    color: #fff;
+                    border-radius: 50%;
+                    width: 32px;
+                    height: 32px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: bold;
+                  "
+                >
+                  2
+                </div>
+                <div>
+                  <h4
+                    style="
+                      margin: 0;
+                      font-size: 16px;
+                      color: rgb(24, 10, 37);
+                      font-weight: 600;
+                    "
+                  >
+                    What We Do
+                  </h4>
+                  <p
+                    style="margin: 5px 0; color: var(--muted); font-weight: 500"
+                  >
+                    From instant document summarization to AI-driven drafting
+                    and live legal advice, we streamline every step of your
+                    legal journey.
+                  </p>
+                </div>
+              </div>
+
+              <div
+                style="display: flex; align-items: flex-start; gap: 12px"
+                class="scroll-animate-item"
+              >
+                <div
+                  style="
+                    background-color: var(--accent);
+                    color: #fff;
+                    border-radius: 50%;
+                    width: 32px;
+                    height: 32px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: bold;
+                  "
+                >
+                  3
+                </div>
+                <div>
+                  <h4
+                    style="
+                      margin: 0;
+                      font-size: 16px;
+                      color: rgb(24, 10, 37);
+                      font-weight: 600;
+                    "
+                  >
+                    How We Help
+                  </h4>
+                  <p
+                    style="margin: 5px 0; color: var(--muted); font-weight: 500"
+                  >
+                    Our tools remove the complexity of legal language, ensuring
+                    clarity, accuracy, and speed for your documentation needs.
+                  </p>
+                </div>
+              </div>
+
+              <div
+                style="display: flex; align-items: flex-start; gap: 12px"
+                class="scroll-animate-item"
+              >
+                <div
+                  style="
+                    background-color: var(--accent);
+                    color: #fff;
+                    border-radius: 50%;
+                    width: 32px;
+                    height: 32px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: bold;
+                  "
+                >
+                  4
+                </div>
+                <div>
+                  <h4
+                    style="
+                      margin: 0;
+                      font-size: 16px;
+                      color: rgb(24, 10, 37);
+                      font-weight: 600;
+                    "
+                  >
+                    Our Vision
+                  </h4>
+                  <p
+                    style="margin: 5px 0; color: var(--muted); font-weight: 500"
+                  >
+                    We aim to make legal assistance as easy as opening a chat
+                    window — anytime, anywhere.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <a
+              href="#"
+              style="
+                display: inline-block;
+                margin-top: 25px;
+                padding: 10px 18px;
+                background: linear-gradient(
+                  135deg,
+                  var(--accent),
+                  var(--accent2)
+                );
+                color: #fff;
+                text-decoration: none;
+                border-radius: 6px;
+                font-weight: bold;
+              "
+              class="scroll-animate-item"
+              >Learn more</a
+            >
+          </div>
+
+          <!-- Right: Image Collage -->
+          <div
+            style="
+              flex: 1;
+              min-width: 280px;
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 10px;
+            "
+            class="scroll-animate"
+          >
+            <img
+              src="./images/head3.png"
+              alt="AI Document Processing"
+              style="width: 100%; border-radius: 8px"
+              class="scroll-animate-item"
+            />
+            <img
+              src="./images/head2.png"
+              alt="Legal Document Drafting"
+              style="width: 100%; border-radius: 8px"
+              class="scroll-animate-item"
+            />
+            <img
+              src="./images/head5.png"
+              alt="AI Chatbot Legal Advice"
+              style="width: 100%; border-radius: 8px"
+              class="scroll-animate-item"
+            />
+            <img
+              src="./images/head4.png"
+              alt="Team Collaboration"
+              style="width: 100%; border-radius: 8px"
+              class="scroll-animate-item"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Timeline -->
+      <!-- Google Fonts -->
+      <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+        rel="stylesheet"
+      />
+
+      <section id="timeline" class="timeline section">
+        <h2 class="reveal" style="color: #050505">Your Startup Journey</h2>
+        <div class="steps">
+          <div class="step reveal">
+            <span class="dot"></span>
+            <div class="content card">
+              <h3>1. Company Registration Certificate</h3>
+              <ul>
+                <li>
+                  Choose business structure → Private Limited, LLP, OPC,
+                  Partnership.
+                </li>
+                <li>Reserve company name via RUN on MCA portal.</li>
+                <li>Prepare ID & address proof of directors/partners.</li>
+                <li>Provide office address proof.</li>
+                <li>
+                  Obtain Digital Signature Certificate (DSC) for directors.
+                </li>
+                <li>Apply for Director Identification Number (DIN).</li>
+                <li>File incorporation form (SPICe+) with MoA, AoA.</li>
+                <li>
+                  MCA verification & approval → Get Certificate of Incorporation
+                  with CIN.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="step reveal">
+            <span class="dot"></span>
+            <div class="content card">
+              <h3>2. Tax Registration Certificate (GST in India)</h3>
+              <ul>
+                <li>
+                  Check GST applicability based on turnover or interstate
+                  supply.
+                </li>
+                <li>Collect PAN, business address proof, and bank details.</li>
+                <li>Apply for GST online using DSC.</li>
+                <li>GST officer verification (may include physical visit).</li>
+                <li>Receive GSTIN & Registration Certificate.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="step reveal">
+            <span class="dot"></span>
+            <div class="content card">
+              <h3>3. Government License Certificate</h3>
+              <ul>
+                <li>
+                  Identify required licenses (FSSAI, Shops & Establishment,
+                  Trade License, etc.).
+                </li>
+                <li>Collect business proof, owner ID proof, NOC if rented.</li>
+                <li>Apply via local/state department portal.</li>
+                <li>Pay applicable fees.</li>
+                <li>
+                  Inspection (if required) and receive license certificate.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Summarization -->
+      <section
+        id="summarizeSection"
+        class="section"
+        style="background-color: #ffffff"
+      >
+        <h2 class="reveal" style="color: #8b597b">Summarization</h2>
+        <div class="grid">
+          <form id="sumFormText" class="card" novalidate>
+            <h3>Summarize Text</h3>
+            <textarea
+              name="text"
+              placeholder="Paste text to summarize..."
+              rows="8"
+              required
+            ></textarea>
+            <button type="submit">Summarize Text</button>
+            <div class="result" id="sumResultText"></div>
+          </form>
+          <form
+            id="sumFormPdf"
+            class="card"
+            enctype="multipart/form-data"
+            novalidate
+          >
+            <h3>Summarize PDF</h3>
+            <input type="file" name="file" accept="application/pdf" />
+            <button type="submit">Upload & Summarize (PDF)</button>
+            <div class="result" id="sumResultPdf"></div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Document Generation moved to a dedicated page (/docgen.html) -->
+
+      <!-- About Us Section -->
+
+      <footer id="legal" class="footer section">
+        <div class="grid">
+          <div>
+            <h3>Contact</h3>
+            <p>Email: support@docusuite.example</p>
+            <p>Phone: +91-90000-00000</p>
+          </div>
+          <form id="legalForm" class="card">
+            <h3>Legal Advise</h3>
+            <input name="name" placeholder="Your Name" required />
+            <input name="email" type="email" placeholder="Email" required />
+            <select name="category" required>
+              <option value="company">Company Registration</option>
+              <option value="tax">Tax/GST</option>
+              <option value="licenses">Licenses</option>
+              <option value="other">Other</option>
+            </select>
+            <textarea
+              name="message"
+              rows="4"
+              placeholder="Your question"
+              required
+            ></textarea>
+            <button type="submit">Request Callback</button>
+            <div class="result" id="legalResult"></div>
+          </form>
+        </div>
+        <div class="copyright">© <span id="year"></span> DocuSuite</div>
+      </footer>
+    </main>
+
+    <!-- Auth Modals -->
+    <dialog id="loginModal" class="modal">
+      <form method="dialog" id="loginForm" class="card">
+        <h3>Login</h3>
+        <input name="username" placeholder="Username" required />
+        <input
+          name="password"
+          type="password"
+          placeholder="Password"
+          required
+        />
+        <div class="actions">
+          <button value="cancel" class="secondary">Cancel</button>
+          <button type="submit" value="confirm">Login</button>
+        </div>
+        <div class="result" id="loginResult"></div>
+      </form>
+    </dialog>
+    <dialog id="registerModal" class="modal">
+      <form method="dialog" id="registerForm" class="card">
+        <h3>Register</h3>
+        <input name="username" placeholder="Username" required />
+        <input
+          name="password"
+          type="password"
+          placeholder="Password"
+          required
+        />
+        <div class="actions">
+          <button value="cancel" class="secondary">Cancel</button>
+          <button type="submit" value="confirm">Register</button>
+        </div>
+        <div class="result" id="registerResult"></div>
+      </form>
+    </dialog>
+
+    <script src="/main.js"></script>
+    <script src="/chatbot.js"></script>
+    <script>
+      fetch('/navbar.html')
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById('navbar').innerHTML = data;
+        });
+    </script>
+
+    <footer>
+      <small>Prototype app - for demonstration only</small>
+    </footer>
+  </body>
+</html>

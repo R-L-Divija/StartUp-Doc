@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatbot Test</title>
+    <style>
+      :root {
+        --accent: #22c55e;
+        --accent2: #16a34a;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: #f0f0f0;
+      }
+
+      .test-content {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #333;
+        text-align: center;
+      }
+
+      .test-info {
+        background: #e8f5e8;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+        border-left: 4px solid #22c55e;
+      }
+
+      .test-info h3 {
+        margin-top: 0;
+        color: #22c55e;
+      }
+
+      .test-info ul {
+        margin: 10px 0;
+        padding-left: 20px;
+      }
+
+      .test-info li {
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="test-content">
+      <h1>🤖 Chatbot Test Page</h1>
+
+      <div class="test-info">
+        <h3>What to look for:</h3>
+        <ul>
+          <li>
+            <strong>Green circular button</strong> at bottom-right corner with
+            headset icon
+          </li>
+          <li>
+            <strong>Red notification badge</strong> with "2" on the button
+          </li>
+          <li>
+            <strong>Prominent "Need Help?" button</strong> above the circular
+            button
+          </li>
+          <li>
+            <strong>Navbar "Chat Assistant" button</strong> (if navbar exists)
+          </li>
+        </ul>
+      </div>
+
+      <div class="test-info">
+        <h3>How to test:</h3>
+        <ul>
+          <li>Click the green circular button to open the chatbot</li>
+          <li>Try asking questions like "What services do you offer?"</li>
+          <li>Click the quick question buttons in the chatbot</li>
+          <li>Check if the chatbot responds properly</li>
+        </ul>
+      </div>
+
+      <div class="test-info">
+        <h3>Expected behavior:</h3>
+        <ul>
+          <li>Chatbot should open when clicking any of the buttons</li>
+          <li>Should show typing indicators when responding</li>
+          <li>Should provide helpful responses about IDM services</li>
+          <li>Should close when clicking the X button</li>
+        </ul>
+      </div>
+
+      <p style="text-align: center; margin-top: 40px; color: #666">
+        If you don't see the chatbot buttons, check the browser console for any
+        JavaScript errors.
+      </p>
+    </div>
+
+    <!-- Load the main.js file to test chatbot -->
+    <script src="main.js"></script>
+    <script src="/chatbot.js"></script>
+  </body>
+</html>
